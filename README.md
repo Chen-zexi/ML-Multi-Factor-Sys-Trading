@@ -49,6 +49,7 @@ ML-Multi-Factor-Sys-Trading/
 ├── .env
 ├── lstm_milestone2.ipynb
 ├── lstm_with_sentiment.ipynb
+├── lstm_without_sentiment.ipynb
 ├── requirements.txt
 └── README.md
 ```
@@ -93,8 +94,13 @@ The project follows a structured workflow to process various data sources and fe
 *   **Objective**: Train and evaluate LSTM models to predict QQQ price movements using the prepared features.
 *   **Steps**:
     1.  `LSTM_Milestone2.ipynb`: This notebook likely represents an initial phase or a specific milestone in developing the LSTM model. It might involve feature engineering, model training, and evaluation using various data sources.
-    2.  `qqq_lstm_pipeline.ipynb`: This notebook serves as the main pipeline. It integrates the QQQ price data and the `nasdaq_100_daily_sentiment.csv` to train and test the final LSTM model. This notebook would handle:
+    2.  `lstm_with_sentiment.ipynb`: This notebook serves as the main pipeline. It integrates the QQQ price data and the `nasdaq_100_daily_sentiment.csv` to train and test the final LSTM model. This notebook would handle:
         *   Loading and merging QQQ price data and aggregated sentiment data.
+        *   Feature scaling and preparation for the LSTM model.
+        *   LSTM model definition, training, and prediction.
+        *   Evaluation of model performance.
+    3.  `lstm_without_sentiment.ipynb`: This notebook does not use sentiment data and only uses QQQ price data to train and test the final LSTM model. This notebook would handle:
+        *   Loading QQQ price data.
         *   Feature scaling and preparation for the LSTM model.
         *   LSTM model definition, training, and prediction.
         *   Evaluation of model performance.
@@ -164,7 +170,7 @@ You can optionally run the steps 1-4 to preprocess more/different data before ru
     *   Run the EDA notebooks in `src/EDA/` (`news_eda.ipynb`, `sentiment_eda.ipynb`).
 4.  **Main Pipeline:**
     *   Run the `lstm_with_sentiment.ipynb` notebook for the main model training and evaluation.
-
+    *   Run the `lstm_without_sentiment.ipynb` notebook for the model without sentiment training and evaluation.
 ## Team Members
 - Alan Chen zc2610@nyu.edu
 - Jun Kwon jk7351@nyu.edu
