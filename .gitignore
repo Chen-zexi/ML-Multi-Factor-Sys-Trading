@@ -1,0 +1,13 @@
+/data/news/*
+/data/backup/
+
+!data/news/nasdaq_news_data_processed.csv
+
+.DS_Store
+.vscode
+
+.env
+
+__pycache__
+
+.cursor
