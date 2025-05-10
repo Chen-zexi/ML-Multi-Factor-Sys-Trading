@@ -194,7 +194,7 @@ You can optionally run the steps 1-4 to preprocess more/different data before ru
 - Jun Kwon jk7351@nyu.edu
 - Vedant Desai vd2152@nyu.edu
 
-## Citation
+## Work Cited
 ```bibtex
 @misc{dong2024fnspid,
       title={FNSPID: A Comprehensive Financial News Dataset in Time Series}, 
