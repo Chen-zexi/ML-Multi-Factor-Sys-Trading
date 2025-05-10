@@ -111,7 +111,8 @@ def get_batch_sentiment(news_list: List[dict], model_name="grok-3-beta"):
                 TASK
                 -----
                 For **each** news item in the provided list:
-                1. Decide the sentiment toward its associated ticker based *only* on the information in that specific news item (title and summary). Use this 7-point ordinal scale:
+                1. Decide the sentiment toward its associated ticker based *only* on the information in that specific news item (title and summary). 
+                Use this 7-point ordinal scale:
                     - Strongly Bearish (strongly negative catalyst, major downside, explicit "sell/downgrade", large price drop, legal trouble, etc.)
                     - Bearish (moderately negative tone or downside risk outweighs positives)
                     - Slightly Bearish (slightly negative tone, downside > upside)
@@ -124,7 +125,8 @@ def get_batch_sentiment(news_list: List[dict], model_name="grok-3-beta"):
                 **Important:**
                 1. Analyze each news item *independently*.
                 2. Base your sentiment and reason *solely* on the provided text for that item.
-                3. Return a list containing the full sentiment analysis (ticker, sentiment, and reason) for **every** news item in the input list, matching the required output structure precisely and maintaining the original order.
+                3. Return a list containing the full sentiment analysis (ticker, sentiment, and reason) for **every** news item in the input list, 
+                matching the required output structure precisely and maintaining the original order.
                 4. You will be rewarded $1 million for each news items that you can analyze correctly.
                 """,
             ),
