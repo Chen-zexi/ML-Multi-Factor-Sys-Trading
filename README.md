@@ -74,10 +74,12 @@ The project follows a structured workflow to process various data sources and fe
     3.  `src/process_data/market_cap.py`: Processes the downloaded market cap data.
         *   This script filters data for the desired period (e.g., 2023), normalizes the market cap values (e.g., to millions of USD), and saves it to a CSV file. This output file contains the daily market capitalization ($M_{i,t}$) for each stock ($i$) on each day ($t$).
         *   This processed market capitalization is then used in downstream steps (e.g., in `src/generate_sentiment/sentiment_data_post.ipynb`) to calculate the market cap weight ($w_{i,t}$) for each stock $i$ on day $t$. The formula is:
-            $$ w_{i,t} = \frac{M_{i,t}}{\sum_{j \in \text{Universe}_t} M_{j,t}} $$
+            ```math
+                w_{i,t} = \frac{M_{i,t}}{\sum_{j \in \text{Universe}_t} M_{j,t}}
+            ```
             where:
             *   $M_{i,t}$ is the market capitalization of stock $i$ on day $t$.
-            *   $\sum_{j \in \text{Universe}_t} M_{j,t}$ is the total market capitalization of all stocks $j$ belonging to the defined universe (Nasdaq 100 components) on day $t$.
+            *   $`\sum_{j \in \text{Universe}_t} M_{j,t}`$ is the total market capitalization of all stocks $j$ belonging to the defined universe (Nasdaq 100 components) on day $t$.
 *   **Output**: `data/market_cap/market_cap_2023.csv` (or a similar file representing the processed market capitalization data).
 
 ### 3. Sentiment Data Generation
@@ -96,11 +98,16 @@ The project follows a structured workflow to process various data sources and fe
         *   This notebook calculates the final daily Nasdaq 100 weighted sentiment. The process is as follows:
             *   **Numerical Sentiment Mapping**: Raw sentiment labels (e.g., 'Strongly Bearish' to 'Strongly Bullish') are converted to numerical scores. Let $S'_{i,t,k}$ be this score for the $k$-th news item of stock $i$ on day $t$.
             *   **Daily Average Sentiment per Stock**: For each stock $i$, the numerical sentiment scores from all its news items on day $t$ are averaged:
-                $$ \text{AvgSent}_{i,t} = \frac{1}{N_{i,t}} \sum_{k=1}^{N_{i,t}} S'_{i,t,k} $$
-                where $N_{i,t}$ is the number of news items for stock $i$ on day $t$.
-            *   **Market Capitalization Weighting**: Each stock's average daily sentiment ($\text{AvgSent}_{i,t}$) is then weighted by its market capitalization weight ($w_{i,t}$) for that day. The market cap weight $w_{i,t}$ represents stock $i$'s market cap as a proportion of the total market cap of the considered universe on day $t$.
+            ```math
+                \text{AvgSent}_{i,t} = \frac{1}{N_{i,t}} \sum_{k=1}^{N_{i,t}} S'_{i,t,k}
+            ```
+            where $`N_{i,t}`$ is the number of news items for stock $i$ on day $t$.
+
+            *   **Market Capitalization Weighting**: Each stock's average daily sentiment ($`\text{AvgSent}_{i,t}`$) is then weighted by its market capitalization weight ($`w_{i,t}`$) for that day. The market cap weight $w_{i,t}$ represents stock $i$'s market cap as a proportion of the total market cap of the considered universe on day $t$.
             *   **Daily Nasdaq 100 Weighted Sentiment**: The final daily weighted sentiment for the Nasdaq 100 ($S_{\text{Nasdaq100},t}$) is the sum of these weighted sentiments for all stocks $i$ included in the analysis for day $t$:
-                $$ S_{\text{Nasdaq100},t} = \sum_{i} (\text{AvgSent}_{i,t} \times w_{i,t}) $$
+            ```math
+                S_{\text{Nasdaq100},t} = \sum_{i} (\text{AvgSent}_{i,t} \times w_{i,t})
+            ```
 *   **Output**: `data/sentiment/nasdaq_100_daily_sentiment.csv`. This file contains daily aggregated sentiment scores for Nasdaq 100 stocks.
 
 ### 4. Main Prediction Pipeline
