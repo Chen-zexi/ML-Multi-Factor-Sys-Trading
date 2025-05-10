@@ -127,7 +127,7 @@ The project follows a structured workflow to process various data sources and fe
 The raw data and intermediate processed data are stored primarily within the `data/` directory:
 *   `data/data_for_LSTM/`: Contains QQQ price data and Nasdaq 100 daily sentiment data. This is the final data used for LSTM models.
 *   `data/market_cap/`: Contains market capitalization data, including `market_cap_2023.csv` and it raw data `tickers_2014_2025.csv`.
-*   `data/news/`: Stores raw and processed news articles. Only the processed data is uploaded via github lfs. The raw data is too large.
+*   `data/news/`: Stores raw and processed news articles. Only the processed data is uploaded via github lfs. The raw data can be accessed from the original dataset [FNSPID](https://github.com/Zdong104/FNSPID_Financial_News_Dataset).
 *   `data/sentiment/`: Contains generated sentiment scores by different LLMs and some intermediate files.
 *   `data/nasdaq_100/`: Nasdaq 100 constituents stored in json file. 
 
@@ -186,3 +186,15 @@ You can optionally run the steps 1-4 to preprocess more/different data before ru
 - Alan Chen zc2610@nyu.edu
 - Jun Kwon jk7351@nyu.edu
 - Vedant Desai vd2152@nyu.edu
+
+## Citation
+```bibtex
+@misc{dong2024fnspid,
+      title={FNSPID: A Comprehensive Financial News Dataset in Time Series}, 
+      author={Zihan Dong and Xinyu Fan and Zhiyuan Peng},
+      year={2024},
+      eprint={2402.06698},
+      archivePrefix={arXiv},
+      primaryClass={q-fin.ST}
+}
+```

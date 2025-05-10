@@ -14,6 +14,7 @@ first_processed_uid = 0
 last_processed_uid = 0
 sentiment_file_path = '../../data/sentiment/sentiment_2023.csv'
 processed_news_file_path = '../../data/news/nasdaq_news_data_processed.csv'
+## Config further detail in the bottom of the file. 
 
 
 existing_sentiment_df = pd.read_csv(sentiment_file_path)
@@ -170,9 +171,6 @@ def process_sentiment_by_uid(
             print(f"Overwrite mode: Saving {sentiment_output_path} even with no target news, to reflect potential range clearing.")
             try:
                 # If existing_sentiment_df was filtered for overwrite, that filtered version should be saved.
-                # This is handled by effective_existing_df logic below.
-                # For now, if target_news_df is empty, effective_existing_df will be based on existing_sentiment_df
-                # and the overwrite flag logic.
                 temp_effective_df_for_empty_target = existing_sentiment_df.copy()
                 if not temp_effective_df_for_empty_target.empty: # Only filter if not empty
                     temp_effective_df_for_empty_target = temp_effective_df_for_empty_target[
@@ -215,7 +213,7 @@ def process_sentiment_by_uid(
             
             num_skipped = len(target_news_df[target_news_df['UID'].isin(uids_with_valid_sentiment)])
             print(f"Found {num_skipped} UIDs in target range ({start_uid}-{end_uid}) with existing valid sentiment. Skipping them.")
-        else: # effective_existing_df (and thus existing_sentiment_df) is empty
+        else:
             uids_to_process_df = target_news_df.copy()
             print("No existing sentiment data found. Processing all UIDs in target range.")
 
@@ -260,15 +258,9 @@ def process_sentiment_by_uid(
                 # Ensure batch_results_df has the same UIDs as current_chunk_df, or handle discrepancies
                 if not batch_results_df['UID'].equals(current_chunk_df['UID'].reset_index(drop=True)):
                     print(f"Warning: UIDs in batch results do not perfectly match UIDs in the processed chunk for batch {i+1}. Aligning...")
-                    # Attempt to merge to keep all original UIDs and fill sentiments
-                    # This part might need more sophisticated alignment if order is not guaranteed
-                    # For now, assume analyze_sentiment_wrapper tries to preserve order or returns for all.
-                    # A simple reindex might be too naive if results are partial.
-                    # The current analyze_sentiment_wrapper seems to handle mismatched lengths.
 
                 batch_successful = True
                 all_new_results.append(batch_results_df)
-                # Removed break here, success is checked by batch_successful flag
 
             except Exception as e:
                 retries += 1

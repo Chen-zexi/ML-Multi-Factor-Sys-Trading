@@ -151,8 +151,6 @@ news_tickers_by_year = {} # Store unique tickers found in news data per year
 if not filtered_news_df.empty and 'nasdaq_membership_processed' in locals() and nasdaq_membership_processed:
     print("\nComparing news data tickers against membership list for each year...")
 
-    # --- Start Replace Block ---
-    # Check if the required 'Year' column exists and is integer
     if 'Year' in filtered_news_df.columns and pd.api.types.is_integer_dtype(filtered_news_df['Year']):
         year_col_to_use = 'Year' # Use the existing integer 'Year' column directly
         print(f"Using integer column '{year_col_to_use}' for comparison with integer membership keys.")
@@ -163,7 +161,6 @@ if not filtered_news_df.empty and 'nasdaq_membership_processed' in locals() and 
     else:
         print("Error: 'Year' column not found in filtered_news_df. Cannot perform comparison.")
         year_col_to_use = None # Prevent further processing
-    # --- End Replace Block ---
 
     if year_col_to_use:
         # Iterate through the years we have membership data for (integer keys)
